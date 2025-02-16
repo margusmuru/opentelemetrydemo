@@ -9,7 +9,7 @@ spec:
     tier: backend
   type: NodePort
   ports:
-    - port: 5432
+    - port: 8080
       nodePort: 30300
 ---
 apiVersion: apps/v1
