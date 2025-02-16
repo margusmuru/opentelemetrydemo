@@ -1,4 +1,4 @@
-FROM openjdk:17-jre-slim
+FROM openjdk:17-jdk-slim
 EXPOSE 8080
 ARG JAR_FILE=build/libs/opentelemetrydemo*.jar
 ADD ${JAR_FILE} app.jar
