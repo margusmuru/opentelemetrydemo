@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="8e5c5bbc-4c33-4d73-9963-acc64a025df2" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
+  <name>Build</name>
+  <description />
+  <settings>
+    <parameters>
+      <param name="env.buildNumber" value="1" />
+    </parameters>
+    <build-runners>
+      <runner id="Initialize_bin_bash_chmod_x_gradlew_VERSION_gradlew_properties_q_grep_version_aw" name="Initialize#!/bin/bash chmod +x gradlew VERSION=$(./gradlew properties -q | grep &quot;version:&quot; | awk '{print $2}') echo &quot;##teamcity[setParameter name='env.buildNumber' value='$VERSION']&quot;" type="simpleRunner">
+        <parameters>
+          <param name="plugin.docker.imageId" value="openjdk:17-jdk-slim" />
+          <param name="plugin.docker.imagePlatform" value="linux" />
+          <param name="script.content"><![CDATA[#!/bin/bash
+chmod +x gradlew
+VERSION=$(./gradlew properties -q | grep "version:" | awk '{print $2}')
+echo "##teamcity[setParameter name='env.buildNumber' value='$VERSION']"]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="Gradle_clean_build" name="Gradle clean build" type="gradle-runner">
+        <parameters>
+          <param name="plugin.docker.imageId" value="openjdk:17-jdk-slim" />
+          <param name="plugin.docker.imagePlatform" value="linux" />
+          <param name="teamcity.coverage.emma.include.source" value="true" />
+          <param name="teamcity.coverage.emma.instr.parameters" value="-ix -*Test*" />
+          <param name="teamcity.coverage.idea.includePatterns" value="*" />
+          <param name="teamcity.coverage.jacoco.patterns" value="+:*" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="teamcity.tool.jacoco" value="%teamcity.tool.jacoco.DEFAULT%" />
+          <param name="ui.gradleRunner.gradle.tasks.names" value="clean build -x test" />
+          <param name="ui.gradleRunner.gradle.wrapper.useWrapper" value="true" />
+        </parameters>
+      </runner>
+      <runner id="Docker_build_image" name="Docker build image" type="DockerCommand">
+        <parameters>
+          <param name="docker.command.type" value="build" />
+          <param name="docker.image.namesAndTags" value="k8s-vm.margusm.dev:32000/opentelemetrydemo:%env.buildNumber%" />
+          <param name="docker.push.remove.image" value="true" />
+          <param name="dockerfile.path" value="Dockerfile" />
+          <param name="dockerfile.source" value="PATH" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="Docker_push_image" name="Docker push image" type="DockerCommand">
+        <parameters>
+          <param name="docker.command.type" value="push" />
+          <param name="docker.image.namesAndTags" value="k8s-vm.margusm.dev:32000/opentelemetrydemo:%env.buildNumber%" />
+          <param name="docker.push.remove.image" value="true" />
+          <param name="dockerfile.source" value="PATH" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="Deployment" name="Deployment" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[#!/bin/bash
+cd docker && sed -i 's/<version>/%env.buildNumber%/g' deployment.yaml
+cat deployment.yaml
+kubectl apply -f deployment.yaml]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <vcs-settings>
+      <vcs-entry-ref root-id="Opentelemetrydemo_HttpsGithubComMargusmuruOpentelemetrydemoRefsHeadsMain" />
+    </vcs-settings>
+    <requirements />
+    <build-triggers>
+      <build-trigger id="TRIGGER_2" type="vcsTrigger">
+        <parameters>
+          <param name="branchFilter" value="+:*" />
+          <param name="enableQueueOptimization" value="true" />
+          <param name="quietPeriodMode" value="DO_NOT_USE" />
+        </parameters>
+      </build-trigger>
+    </build-triggers>
+    <build-extensions>
+      <extension id="perfmon" type="perfmon">
+        <parameters>
+          <param name="teamcity.perfmon.feature.enabled" value="true" />
+        </parameters>
+      </extension>
+    </build-extensions>
+    <cleanup />
+  </settings>
+</build-type>
+
