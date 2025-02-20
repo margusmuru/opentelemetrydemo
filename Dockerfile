@@ -5,7 +5,7 @@ ADD ${JAR_FILE} app.jar
 ADD /docker/opentelemetry-javaagent.jar opentelemetry-javaagent.jar
 ENV JAVA_TOOL_OPTIONS="-javaagent:opentelemetry-javaagent.jar"
 ENV OTEL_LOGS_EXPORTER=otlp
-ENV OTEL_TRACES_EXPORTER=logging
+ENV OTEL_TRACES_EXPORTER=otlp
 ENV OTEL_METRICS_EXPORTER=otlp
 ENV OTEL_EXPORTER_OTLP_ENDPOINT=http://192.168.40.109:4317
 ENV OTEL_EXPORTER_OTLP_PROTOCOL=grpc
