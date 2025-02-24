@@ -2,7 +2,8 @@ FROM openjdk:17-jdk-slim
 EXPOSE 8080
 ARG JAR_FILE=build/libs/opentelemetrydemo*.jar
 ADD ${JAR_FILE} app.jar
-ADD /docker/opentelemetry-javaagent.jar opentelemetry-javaagent.jar
+#ADD /docker/opentelemetry-javaagent.jar opentelemetry-javaagent.jar
+ADD https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar opentelemetry-javaagent.jar
 ENV JAVA_TOOL_OPTIONS="-javaagent:opentelemetry-javaagent.jar"
 ENV OTEL_LOGS_EXPORTER=otlp
 ENV OTEL_TRACES_EXPORTER=otlp
