@@ -50,4 +50,4 @@ spec:
                 fieldRef:
                   fieldPath: spec.nodeName
             - name: OTEL_RESOURCE_ATTRIBUTES
-              value: "service.name=my-java-app,service.instance.id=$(POD_NAME),k8s.namespace.name=$(K8S_NAMESPACE),k8s.node.name=$(NODE_NAME)"
+              value: "service.instance.id=$(POD_NAME),k8s.namespace.name=$(K8S_NAMESPACE),k8s.node.name=$(NODE_NAME)"
