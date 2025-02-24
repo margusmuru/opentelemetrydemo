@@ -37,8 +37,6 @@ spec:
             - name: http
               containerPort: 8080
           env:
-            - name: OTEL_RESOURCE_ATTRIBUTES
-              value: "service.name=my-java-app,service.instance.id=$(POD_NAME),k8s.namespace.name=$(K8S_NAMESPACE),k8s.node.name=$(NODE_NAME)"
             - name: POD_NAME
               valueFrom:
                 fieldRef:
@@ -51,3 +49,5 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: "service.name=my-java-app,service.instance.id=$(POD_NAME),k8s.namespace.name=$(K8S_NAMESPACE),k8s.node.name=$(NODE_NAME)"
