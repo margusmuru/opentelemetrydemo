@@ -35,6 +35,13 @@ dependencies {
 	implementation("io.opentelemetry:opentelemetry-exporter-logging")
 	implementation("io.opentelemetry:opentelemetry-exporter-otlp")
 	implementation("io.opentelemetry:opentelemetry-sdk-extension-autoconfigure")
+
+	// Spring Boot auto-instrumentation
+	implementation 'io.opentelemetry.instrumentation:opentelemetry-spring-boot-starter:1.31.0-alpha'
+	// For web instrumentation
+	implementation 'io.opentelemetry.instrumentation:opentelemetry-spring-webmvc-5.3:1.31.0-alpha'
+	// For database instrumentation (if needed)
+	implementation 'io.opentelemetry.instrumentation:opentelemetry-jdbc:1.31.0-alpha'
 }
 
 tasks.named('test') {

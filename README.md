@@ -21,6 +21,8 @@ Main dependencies:
 implementation("io.opentelemetry:opentelemetry-api")
 implementation("io.opentelemetry:opentelemetry-sdk")
 implementation("io.opentelemetry:opentelemetry-exporter-logging")
+implementation("io.opentelemetry:opentelemetry-exporter-otlp")
+implementation("io.opentelemetry:opentelemetry-sdk-extension-autoconfigure")
 ```
 Provides zero-configuration setup for OpenTelemetry SDK. Requires ENV variables \
 https://opentelemetry.io/docs/languages/java/configuration/#zero-code-sdk-autoconfigure
