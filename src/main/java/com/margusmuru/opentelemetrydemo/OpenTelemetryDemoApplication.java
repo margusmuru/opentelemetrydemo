@@ -1,5 +1,6 @@
 package com.margusmuru.opentelemetrydemo;
 
+import io.opentelemetry.api.metrics.Meter;
 import io.opentelemetry.api.trace.Tracer;
 import io.opentelemetry.sdk.OpenTelemetrySdk;
 import io.opentelemetry.sdk.autoconfigure.AutoConfiguredOpenTelemetrySdk;
@@ -22,6 +23,11 @@ public class OpenTelemetryDemoApplication {
 	@Bean
 	public Tracer tracer(OpenTelemetrySdk sdk) {
 		return sdk.getTracer("com.margusmuru.opentelemetrydemo");
+	}
+
+	@Bean
+	public Meter meter(OpenTelemetrySdk sdk) {
+		return sdk.getMeter("com.margusmuru.opentelemetrydemo");
 	}
 
 }

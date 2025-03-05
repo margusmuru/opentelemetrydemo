@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class RestController {
     private final HelloService helloService;
     private final ByeService byeService;
+    private final MeterService meterService;
 
     @GetMapping("/hello")
     public String hello() {
@@ -21,6 +22,12 @@ public class RestController {
     public String bye() {
         log.info("Received call to /bye endpoint");
         return byeService.sayBye();
+    }
+
+    @GetMapping("/meter")
+    public String meter() {
+        log.info("Received call to /meter endpoint");
+        return meterService.meter();
     }
 
 }
