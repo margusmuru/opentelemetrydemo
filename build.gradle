@@ -41,6 +41,8 @@ dependencies {
 	implementation 'io.opentelemetry.instrumentation:opentelemetry-spring-webmvc-5.3:1.31.0-alpha'
 	// For database instrumentation (if needed)
 	implementation 'io.opentelemetry.instrumentation:opentelemetry-jdbc:1.31.0-alpha'
+	// Logs appender
+	implementation 'io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0:1.31.0-alpha'
 }
 
 tasks.named('test') {
