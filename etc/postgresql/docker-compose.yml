@@ -1,0 +1,17 @@
+---
+services:
+  open-telemetry-demo-postgres:
+    image: postgres:16
+    container_name: open-telemetry-demo
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: demo_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - open-telemetry-demo-data:/var/lib/postgresql/data
+
+volumes:
+  open-telemetry-demo-data:

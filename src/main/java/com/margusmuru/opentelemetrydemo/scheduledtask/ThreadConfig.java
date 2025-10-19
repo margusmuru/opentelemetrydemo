@@ -1,4 +1,4 @@
-package com.margusmuru.opentelemetrydemo;
+package com.margusmuru.opentelemetrydemo.scheduledtask;
 
 
 import org.springframework.context.annotation.Bean;

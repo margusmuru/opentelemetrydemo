@@ -1,5 +1,6 @@
-package com.margusmuru.opentelemetrydemo;
+package com.margusmuru.opentelemetrydemo.controller;
 
+import com.margusmuru.opentelemetrydemo.service.DataGeneratorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,12 @@ public class DataController {
     public String data(@RequestParam Long count) {
         log.info("Received call to /data endpoint");
         return dataGeneratorService.generateData(count);
+    }
+
+    @GetMapping("/db")
+    public String db(@RequestParam Long count) {
+        log.info("Received call to /db endpoint");
+        return dataGeneratorService.writeDb(count);
     }
 
 }

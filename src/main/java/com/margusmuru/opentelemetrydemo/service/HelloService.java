@@ -1,4 +1,4 @@
-package com.margusmuru.opentelemetrydemo;
+package com.margusmuru.opentelemetrydemo.service;
 
 import org.springframework.stereotype.Service;
 

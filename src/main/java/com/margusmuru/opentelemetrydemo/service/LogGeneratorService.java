@@ -1,5 +1,6 @@
-package com.margusmuru.opentelemetrydemo;
+package com.margusmuru.opentelemetrydemo.service;
 
+import com.margusmuru.opentelemetrydemo.scheduledtask.DemoTask;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.task.TaskExecutor;

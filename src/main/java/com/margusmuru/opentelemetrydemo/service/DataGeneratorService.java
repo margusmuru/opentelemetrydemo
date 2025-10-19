@@ -1,11 +1,16 @@
-package com.margusmuru.opentelemetrydemo;
+package com.margusmuru.opentelemetrydemo.service;
 
+import com.margusmuru.opentelemetrydemo.persistence.SomeDataEntity;
+import com.margusmuru.opentelemetrydemo.persistence.SomeDataRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class DataGeneratorService {
+    private final SomeDataRepository someDataRepository;
     private final String LOREM_1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor " +
             "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco " +
             "laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit " +
@@ -27,4 +32,12 @@ public class DataGeneratorService {
         }
     }
 
+    public String writeDb(Long count) {
+        // Anyone doing this in production should be fired!
+        for (long i = 0; i < count; i++) {
+            SomeDataEntity someDataEntity = SomeDataEntity.builder().myData(i + "").build();
+            someDataRepository.save(someDataEntity);
+        }
+        return null;
+    }
 }

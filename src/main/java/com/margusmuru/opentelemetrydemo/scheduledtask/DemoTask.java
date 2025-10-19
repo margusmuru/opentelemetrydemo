@@ -1,4 +1,4 @@
-package com.margusmuru.opentelemetrydemo;
+package com.margusmuru.opentelemetrydemo.scheduledtask;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
