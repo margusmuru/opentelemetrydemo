@@ -1,25 +1,20 @@
 <configuration>
 
-    <!-- Console appender: outputs log messages to the console with timestamp, thread, MDC, log level, logger name, and message -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %X %highlight(%-5level) [%C{0}] %msg%n</pattern>
         </encoder>
     </appender>
 
-    <!-- Root logger: captures WARN and above for all packages, including uncaught exceptions and system warnings,
-     output to console -->  <root level="WARN">
+<root level="WARN">
     <appender-ref ref="CONSOLE"/>
 </root>
 
-    <!-- Application logger: captures DEBUG and above for ee.rmit.nes, including business logic flow,
-     service calls, and application-specific events, output to console -->
 <logger name="com.margusmuru.opentelemetrydemo" level="DEBUG" additivity="false">
     <appender-ref ref="CONSOLE"/>
 </logger>
 
-    <!-- Spring WS logger: captures TRACE and above for web service interactions, including SOAP request/response payloads,
-     endpoint invocations, and transport-level details, output to console -->
+
 <logger name="org.springframework.ws" level="TRACE" additivity="false">
     <appender-ref ref="CONSOLE"/>
 </logger>

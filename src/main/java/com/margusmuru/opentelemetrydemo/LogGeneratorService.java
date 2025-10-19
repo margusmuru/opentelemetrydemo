@@ -17,6 +17,6 @@ public class LogGeneratorService implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         DemoTask task = new DemoTask();
-        taskExecutor.execute(task);
+        // taskExecutor.execute(task);
     }
 }
