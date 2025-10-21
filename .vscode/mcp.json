@@ -1,0 +1,14 @@
+{
+    "servers": {
+        "postgres": {
+            "command": "docker",
+            "args": [
+                "run",
+                "-i",
+                "--rm",
+                "mcp/postgres",
+                "postgresql://admin:secret@host.docker.internal:5433/demo_db"
+            ]
+        }
+    }
+}
